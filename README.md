@@ -3,37 +3,39 @@
 Added the ability to delete routes to the web socket server for the bluemix swift app.
 
 * added code in WebSocket.swift
-* public static func unregister(onPath path: String) {
-*    factory.unregister(onPath: path.lowercased())
-* }
-* public static func hasChannel(onPath path: String) -> Bool {
-*    return factory.hasRegistry(onPath: path.lowercased())
-* }
+```swift
+public static func unregister(onPath path: String) {
+    factory.unregister(onPath: path.lowercased())
+}
+public static func hasChannel(onPath path: String) -> Bool {
+    return factory.hasRegistry(onPath: path.lowercased())
+}
+```
 
 * added code in WSConnectionUpgradeFactory.swift
-* func unregister(onPath: String) {
-*   let path: String
-*   if onPath.hasPrefix("/") {
-*       path = onPath
-*   }
-*   else {
-*       path = "/" + onPath
-*   }
-*   registry.removeValue(forKey: path)
-* }
+```swift
+func unregister(onPath: String) {
+    let path: String
+    if onPath.hasPrefix("/") {
+        path = onPath
+    }
+    else {
+        path = "/" + onPath
+    }
+    registry.removeValue(forKey: path)
+}
 
 func hasRegistry(onPath: String) -> Bool {
-let path: String
-if onPath.hasPrefix("/") {
-path = onPath
+    let path: String
+    if onPath.hasPrefix("/") {
+        path = onPath
+    }
+    else {
+        path = "/" + onPath
+    }
+    return registry[path] != nil
 }
-else {
-path = "/" + onPath
-}
-return registry[path] != nil
-}
-
-
+```
 **WebSocket support for Kitura base servers**
 
 [![Build Status - Master](https://travis-ci.org/IBM-Swift/Kitura-WebSocket.svg?branch=master)](https://travis-ci.org/IBM-Swift/Kitura-WebSocket)
